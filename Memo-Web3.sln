@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.14.36401.2 d17.14
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Memo.ApplicationCore", "Memo.ApplicationCore\Memo.ApplicationCore.csproj", "{35EC159C-F6F9-47FB-AB7E-ABA46BFF98BF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MemoApp.ApplicationCore", "Memo.ApplicationCore\MemoApp.ApplicationCore.csproj", "{35EC159C-F6F9-47FB-AB7E-ABA46BFF98BF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Memo.Infrastructure", "Memo.Infrastructure\Memo.Infrastructure.csproj", "{79231079-AA23-4C26-843B-14C91B3C0FC8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MemoApp.Infrastructure", "Memo.Infrastructure\MemoApp.Infrastructure.csproj", "{79231079-AA23-4C26-843B-14C91B3C0FC8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Memo.Api", "Memo.Api\Memo.Api.csproj", "{86220904-4856-416F-8BD5-B295F2DE45BB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MemoApp.Api", "Memo.Api\MemoApp.Api.csproj", "{86220904-4856-416F-8BD5-B295F2DE45BB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

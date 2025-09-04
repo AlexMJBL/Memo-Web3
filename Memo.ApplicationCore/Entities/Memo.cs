@@ -5,12 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Memo.ApplicationCore.Entities
+namespace MemoApp.ApplicationCore.Entities
 {
-    public class Memo
+    public class Memo : BaseEntity<int>
     {
-        [Key]
-        public int Id { get; set; }
         [Required]
         [StringLength(150)]
         public string Titre { get; set; }

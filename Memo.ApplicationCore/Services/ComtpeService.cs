@@ -1,11 +1,11 @@
-﻿using Memo.ApplicationCore.Interfaces;
+﻿using MemoApp.ApplicationCore.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Memo.ApplicationCore.Services
+namespace MemoApp.ApplicationCore.Services
 {
     public class ComtpeService : IComtpeService
     {

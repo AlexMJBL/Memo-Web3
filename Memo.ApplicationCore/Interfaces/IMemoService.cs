@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Memo.ApplicationCore.Interfaces
+namespace MemoApp.ApplicationCore.Interfaces
 {
     public interface IMemoService
     {
