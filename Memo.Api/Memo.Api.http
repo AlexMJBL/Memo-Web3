@@ -1,0 +1,6 @@
+@Memo.Api_HostAddress = http://localhost:5050
+
+GET {{Memo.Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
