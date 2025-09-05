@@ -18,9 +18,9 @@ namespace MemoApp.Api.Controllers
         {
             _compteService = compteService;
         }
-        
+
         // Post: api/<CompteController>
-        [HttpPost]
+        [HttpPost("[action]")]
         public async Task<ActionResult<AuthentificationDto>> SeConnecter([FromBody] InfoConnexionDto infoDto)
         {
             try
@@ -38,9 +38,9 @@ namespace MemoApp.Api.Controllers
                 return BadRequest(new{ message = ex.Message});
             }
         }
-        
+
         // Post: api/<CompteController>
-        [HttpPost]
+        [HttpPost("[action]")]
         public async Task<ActionResult<AuthentificationDto>> EnregistrerCompte([FromBody] ProfileDto dto)
         {
             try

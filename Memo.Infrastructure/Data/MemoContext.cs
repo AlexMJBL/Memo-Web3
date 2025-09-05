@@ -19,13 +19,16 @@ namespace MemoApp.Infrastructure.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+     
             modelBuilder.Entity<Memo>()
-                        .HasOne(m => m.Compte)
-                        .WithMany(c => c.Memos)
-                        .HasForeignKey(m => m.IdCompte)
-                        .OnDelete(DeleteBehavior.Cascade);
+                .Property(m => m.Id)
+                .ValueGeneratedOnAdd();
 
-            base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<Memo>()
+                .HasOne(m => m.Compte)
+                .WithMany(c => c.Memos)
+                .HasForeignKey(m => m.IdCompte)
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

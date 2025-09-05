@@ -56,10 +56,6 @@ namespace MemoApp.ApplicationCore.Services
         public async Task<Compte?> ObtenirCompteParNomAsync(string nomUtilisateur)
         {
             var compte = await _compteRepository.GetSingleAsync(c => c.NomUtilisateur.ToLower() == nomUtilisateur.ToLower());
-            if (compte == null)
-            {
-                throw new KeyNotFoundException("Aucun compte avec ce nom d'utilisateur.");
-            }
             return compte;
         }
     }

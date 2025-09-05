@@ -15,5 +15,11 @@ namespace MemoApp.ApplicationCore.Entities
         public DateTime? DateDerniereConnexion { get; set; }
 
         public ICollection<Memo> Memos { get; set; } = new List<Memo>();
+
+        public Compte()
+        {
+            Id = Guid.NewGuid().ToString();
+        }
+
     }
 }

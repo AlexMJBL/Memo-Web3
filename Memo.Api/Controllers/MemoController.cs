@@ -23,7 +23,7 @@ namespace MemoApp.Api.Controllers
         
 
         // GET api/<ValuesController>/5
-        [HttpGet("{nomUtilisateur}")]
+        [HttpGet("[action]/{nomUtilisateur}")]
         public async Task<ActionResult<IEnumerable<MemoDto>>> Get(string nomUtilisateur)
         {
             try
@@ -60,12 +60,16 @@ namespace MemoApp.Api.Controllers
         }
 
         // POST api/<ValuesController>
-        [HttpPost("{nomUtilisateur}")]
+        [HttpPost("[action]/{nomUtilisateur}")]
         public async Task<ActionResult<MemoDto>> Ajouter([FromBody] MemoDto memoDto, [FromRoute] string nomUtilisateur)
         {
             try
             {
                 var compte = await _compteService.ObtenirCompteParNomAsync(nomUtilisateur);
+                if(compte == null) 
+                {
+                    return NotFound("Aucun compte avec ce nom d'utilisateur.");
+                }
                 var memo = new ApplicationCore.Entities.Memo
                 {
                     Titre = memoDto.Titre,
@@ -95,7 +99,7 @@ namespace MemoApp.Api.Controllers
         }
         
         // DELETE api/<ValuesController>/5
-        [HttpDelete("{id}")]
+        [HttpDelete("[action]/{id}")]
         public async Task<ActionResult> Supprimer(int id)
         {
             try
