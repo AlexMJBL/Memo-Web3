@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MemoApp.ApplicationCore.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,5 +9,9 @@ namespace MemoApp.ApplicationCore.Interfaces
 {
     public interface IMemoService
     {
+        Task<IEnumerable<Memo>> ObtenirMemoParCompteAsync(string idCompte);
+        Task SuprimerAsync(int id);
+        Task<Memo> AjouterAsync(Memo memo);
+
     }
 }

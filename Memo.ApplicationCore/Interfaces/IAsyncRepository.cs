@@ -11,11 +11,11 @@ namespace MemoApp.ApplicationCore.Interfaces
     public interface IAsyncRepository<TBaseEntity, TKey> where TBaseEntity : BaseEntity<TKey>
     {
         Task<TBaseEntity> GetByIdAsync(TKey id);
+        Task<TBaseEntity?> GetSingleAsync(Expression<Func<TBaseEntity, bool>> predicate);
         Task<IEnumerable<TBaseEntity>> ListAsync();
         Task<IEnumerable<TBaseEntity>> ListAsync(Expression<Func<TBaseEntity,bool>> predicate);
         Task AddAsync(TBaseEntity entity);
         Task DeleteAsync(TBaseEntity entity);
         Task EditAsync(TBaseEntity entity);
-
     }
 }

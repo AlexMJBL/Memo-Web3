@@ -1,6 +1,7 @@
 ﻿using MemoApp.ApplicationCore.Entities;
 using MemoApp.ApplicationCore.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using System.Linq.Expressions;
 
 namespace MemoApp.Infrastructure.Data
 {
@@ -41,11 +42,17 @@ namespace MemoApp.Infrastructure.Data
             return await _dbContext.Set<TBaseEntity>().ToListAsync();
         }
 
-        public virtual async Task<IEnumerable<TBaseEntity>> ListAsync(System.Linq.Expressions.Expression<Func<TBaseEntity, bool>> predicate)
+        public virtual async Task<IEnumerable<TBaseEntity>> ListAsync(Expression<Func<TBaseEntity, bool>> predicate)
         {
             return await _dbContext.Set<TBaseEntity>()
                 .Where(predicate)
                 .ToListAsync();
+        }
+
+        public virtual async Task<TBaseEntity?> GetSingleAsync(Expression<Func<TBaseEntity, bool>> predicate)
+        {
+            return await _dbContext.Set<TBaseEntity>()
+                .FirstOrDefaultAsync(predicate);
         }
     }
 
