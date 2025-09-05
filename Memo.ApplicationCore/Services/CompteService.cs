@@ -26,7 +26,8 @@ namespace MemoApp.ApplicationCore.Services
                 throw new Exception("Un compte avec ce nom d'utilisateur existe déjà.");
             }
 
-            compte.DateCreation = DateTime.Today;
+            compte.DateCreation = DateTime.UtcNow;
+            compte.DateDerniereConnexion = DateTime.UtcNow;
             await _compteRepository.AddAsync(compte);
 
             return compte;
@@ -43,7 +44,7 @@ namespace MemoApp.ApplicationCore.Services
 
             if (compte == null || compte.MotDePasse != motDePasse)
             {
-                throw new Exception("Nom d'utilisateur ou mot de passe incorrect.");
+                throw new UnauthorizedAccessException("Nom d'utilisateur ou mot de passe incorrect.");
             }
 
             compte.DateDerniereConnexion = DateTime.UtcNow;

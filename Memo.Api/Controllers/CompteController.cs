@@ -1,4 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Memo.Api.DTO;
+using MemoApi.DTO;
+using MemoApp.ApplicationCore.Entities;
+using MemoApp.ApplicationCore.Interfaces;
+using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -8,36 +12,60 @@ namespace MemoApp.Api.Controllers
     [ApiController]
     public class CompteController : ControllerBase
     {
-        // GET: api/<CompteController>
-        [HttpGet]
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "value1", "value2" };
-        }
+        private readonly ICompteService _compteService;
 
-        // GET api/<CompteController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
+        public CompteController(ICompteService compteService)
         {
-            return "value";
+            _compteService = compteService;
         }
-
-        // POST api/<CompteController>
+        
+        // Post: api/<CompteController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public async Task<ActionResult<AuthentificationDto>> SeConnecter(InfoConnexionDto Infodto)
         {
+            try
+            {
+                await _compteService.SeConnecterAsync(Infodto.NomUtilisateur, Infodto.MotDePasse);
+                AuthentificationDto authenDto = new AuthentificationDto
+                    {
+                        NomUtilisateur = Infodto.NomUtilisateur,
+                        DateEmission = DateTime.UtcNow,
+                    };
+                return Ok(authenDto);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new{ message = ex.Message});
+            }
         }
-
-        // PUT api/<CompteController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        
+        // Post: api/<CompteController>
+        [HttpPost]
+        public async Task<ActionResult<AuthentificationDto>> EnregistrerCompte(ProfileDto dto)
         {
-        }
-
-        // DELETE api/<CompteController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
+            try
+            {
+                Compte compte = new Compte
+                {
+                    NomUtilisateur = dto.NomUtilisateur,
+                    MotDePasse = dto.MotDePasse,
+                };
+                await _compteService.CreerCompteAsync(compte);
+                AuthentificationDto authenDto = new AuthentificationDto
+                {
+                    NomUtilisateur = dto.NomUtilisateur,
+                    DateEmission = DateTime.UtcNow,
+                };
+                return Ok(authenDto);
+            }
+            catch (UnauthorizedAccessException ex)
+            {
+                return Unauthorized(new { message = ex.Message });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new{ message = ex.Message});
+            }
         }
     }
 }
