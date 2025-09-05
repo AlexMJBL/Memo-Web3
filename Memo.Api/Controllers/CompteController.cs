@@ -21,14 +21,14 @@ namespace MemoApp.Api.Controllers
         
         // Post: api/<CompteController>
         [HttpPost]
-        public async Task<ActionResult<AuthentificationDto>> SeConnecter(InfoConnexionDto Infodto)
+        public async Task<ActionResult<AuthentificationDto>> SeConnecter([FromBody] InfoConnexionDto infoDto)
         {
             try
             {
-                await _compteService.SeConnecterAsync(Infodto.NomUtilisateur, Infodto.MotDePasse);
+                await _compteService.SeConnecterAsync(infoDto.NomUtilisateur, infoDto.MotDePasse);
                 AuthentificationDto authenDto = new AuthentificationDto
                     {
-                        NomUtilisateur = Infodto.NomUtilisateur,
+                        NomUtilisateur = infoDto.NomUtilisateur,
                         DateEmission = DateTime.UtcNow,
                     };
                 return Ok(authenDto);
@@ -41,7 +41,7 @@ namespace MemoApp.Api.Controllers
         
         // Post: api/<CompteController>
         [HttpPost]
-        public async Task<ActionResult<AuthentificationDto>> EnregistrerCompte(ProfileDto dto)
+        public async Task<ActionResult<AuthentificationDto>> EnregistrerCompte([FromBody] ProfileDto dto)
         {
             try
             {

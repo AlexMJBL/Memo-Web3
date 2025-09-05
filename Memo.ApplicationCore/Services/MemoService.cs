@@ -1,10 +1,5 @@
 ﻿using MemoApp.ApplicationCore.Entities;
 using MemoApp.ApplicationCore.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MemoApp.ApplicationCore.Services
 {
@@ -50,7 +45,7 @@ namespace MemoApp.ApplicationCore.Services
 
             if(memo == null)
             {
-                throw new Exception("Le mémo avec l'identifiant spécifié n'existe pas.");
+                throw new KeyNotFoundException("Le mémo avec l'identifiant spécifié n'existe pas.");
             }
 
             await _memoRepository.DeleteAsync(memo);
