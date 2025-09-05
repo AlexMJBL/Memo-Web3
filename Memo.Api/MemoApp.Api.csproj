@@ -20,8 +20,4 @@
     <ProjectReference Include="..\Memo.Infrastructure\MemoApp.Infrastructure.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Controllers\" />
-  </ItemGroup>
-
 </Project>
