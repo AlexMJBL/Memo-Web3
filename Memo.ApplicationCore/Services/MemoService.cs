@@ -22,7 +22,7 @@ namespace MemoApp.ApplicationCore.Services
                 throw new ArgumentException("L'identifiant du compte ne peut pas être nul.", nameof(memo.IdCompte));
             }
             
-            memo.DateCreation = DateTime.Today;
+            memo.DateCreation = DateTime.UtcNow;
 
             await _memoRepository.AddAsync(memo);
 

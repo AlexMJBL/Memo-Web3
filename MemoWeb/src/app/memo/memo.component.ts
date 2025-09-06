@@ -2,11 +2,12 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Memo } from '../models/Memo';
 import { MemoService } from '../services/memo.service';
 import { ToastrService } from 'ngx-toastr';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-memo',
   standalone: true,
-  imports: [],
+  imports: [DatePipe],
   templateUrl: './memo.component.html',
   styleUrl: './memo.component.css'
 })

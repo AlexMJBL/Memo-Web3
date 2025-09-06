@@ -3,12 +3,12 @@ import { Memo } from '../models/Memo';
 import { MemoService } from '../services/memo.service';
 import { ToastrService } from 'ngx-toastr';
 import { FormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-memo-nouveau',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, RouterModule],
   templateUrl: './memo-nouveau.component.html',
   styleUrl: './memo-nouveau.component.css'
 })

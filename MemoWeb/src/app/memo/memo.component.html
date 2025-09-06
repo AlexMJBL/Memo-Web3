@@ -1,10 +1,10 @@
 @if(memo){
-<div>
-    <div>
+<div class="border p-3 M-3  rounded">
+    <div class="d-flex justify-content-between align-items-center">
         <h2>{{memo.titre}}</h2>
         <button class="btn btn-danger" (click)="supprimerMemo()">X</button>
     </div>
-    <p>{{memo.dateCreation}}</p>
-    <p>{{memo.description}}</p>
+    <p>{{memo.dateCreation |date:'d MMMM yyyy, HH:mm'}}</p>
+<div class="memo-description">{{ memo.description }}</div>
 </div>
 }

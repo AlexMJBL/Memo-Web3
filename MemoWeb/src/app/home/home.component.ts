@@ -24,11 +24,16 @@ export class HomeComponent {
   }
 
   chargerMemos() {
-    this.memoService.obtenirMemos().subscribe({
-      next: (memos) => this.memos = memos,
-      error: (erreur) => this.toastr.error(erreur.error.message)
-    });
-  }
+  this.memoService.obtenirMemos().subscribe({
+    next: (memos) => 
+      this.memos = memos.sort((a, b) => {
+        const dateA = a.dateCreation ? new Date(a.dateCreation).getTime() : 0;
+        const dateB = b.dateCreation ? new Date(b.dateCreation).getTime() : 0;
+        return dateA - dateB;
+      }),
+    error: (erreur) => this.toastr.error(erreur.error.message)
+  });
+}
 
   onMemoSupprime(id: number) {
     this.memos = this.memos.filter(m => m.id !== id);

@@ -1,7 +1,26 @@
-<form>
-    <label for="titre">Titre:</label>
-    <input id="titre" [(ngModel)]="memo.titre" name="titre" />
-    <label for="description">Description:</label>
-    <textarea id="description" [(ngModel)]="memo.description" name="description"></textarea>
-    <button class="btn" (click)="creerMemo()">Créer</button>
-</form>
+<div class="d-flex justify-content-center align-items-center mt-5" >
+  <form (ngSubmit)="creerMemo()" class="p-4 border rounded shadow-sm" style="max-width: 500px; width: 100%;">
+    
+    <h2 class="text-center mb-4">Nouveau Mémo</h2>
+
+    <div class="mb-3">
+      <label for="titre" class="form-label">Titre</label>
+      <input id="titre" [(ngModel)]="memo.titre" name="titre" class="form-control" placeholder="Entrez le titre" required>
+    </div>
+
+    <div class="mb-3">
+      <label for="description" class="form-label">Description</label>
+      <textarea id="description" [(ngModel)]="memo.description" name="description" class="form-control" rows="4" placeholder="Entrez la description" required></textarea>
+    </div>
+
+    <div class="d-grid gap-2">
+      <button type="submit" class="btn btn-primary w-100">
+        Créer
+      </button>
+      <button type="button" class="btn btn-secondary w-100" routerLink="/home">
+        Annuler
+      </button>
+    </div>
+
+  </form>
+</div>
