@@ -11,20 +11,20 @@ import { ToastrService } from 'ngx-toastr';
   styleUrl: './memo.component.css'
 })
 export class MemoComponent {
-  @Input() memo : Memo | undefined;
+  @Input() memo: Memo | undefined;
   @Output() memoSupprime = new EventEmitter<number>();
 
-  constructor(private memoService: MemoService, private toastr: ToastrService ) { }
+  constructor(private memoService: MemoService, private toastr: ToastrService) { }
 
   supprimerMemo() {
-  if (!this.memo) return;
+    if (!this.memo) return;
 
-  this.memoService.supprimerMemo(this.memo.id).subscribe({
-    next: (response: any) => {
-      this.toastr.success(response.message);
-      this.memoSupprime.emit(this.memo!.id);
-    },
-    error: (erreur) => this.toastr.error(erreur.error?.message || 'Erreur inconnue')
-  });
-}
+    this.memoService.supprimerMemo(this.memo.id).subscribe({
+      next: (response: any) => {
+        this.toastr.success(response.message);
+        this.memoSupprime.emit(this.memo!.id);
+      },
+      error: (erreur) => this.toastr.error(erreur.error?.message || 'Erreur inconnue')
+    });
+  }
 }

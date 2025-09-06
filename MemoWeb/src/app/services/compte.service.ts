@@ -11,29 +11,29 @@ export class CompteService {
   compteConnecte$ = new BehaviorSubject<CompteJeton | null>(
     JSON.parse(localStorage.getItem('compteJeton') || 'null')
   );
-  
+
   urlBase = "http://localhost:5050/api/compte/"
 
   constructor(private http: HttpClient) { }
 
-  seConnecter(infoConnexion: any){
+  seConnecter(infoConnexion: any) {
     return this.http.post(this.urlBase + 'seconnecter', infoConnexion).pipe(
-      map((reponse : any) => {
-          if(reponse){
-            this.compteConnecte$.next(reponse);
-            localStorage.setItem('compteJeton', JSON.stringify(reponse))
-          }
+      map((reponse: any) => {
+        if (reponse) {
+          this.compteConnecte$.next(reponse);
+          localStorage.setItem('compteJeton', JSON.stringify(reponse))
         }
+      }
       )
     );
   }
 
-  seDeconnecter(){
+  seDeconnecter() {
     localStorage.removeItem('compteJeton');
     this.compteConnecte$.next(null);
   }
 
-  sInscrire(compte: Compte){
+  sInscrire(compte: Compte) {
     return this.http.post(this.urlBase + 'EnregistrerCompte', compte)
   }
 

@@ -12,17 +12,17 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class AppComponent {
   estConnecte = false;
-  
-    constructor(private compteService: CompteService, private routeur: Router, private toastr: ToastrService){ }
-  
-    ngOnInit(): void {
-      this.compteService.compteConnecte$.subscribe(compte => {
-        this.estConnecte = !!compte;
-      });
-    }
-  
-    seDeconnecter(){
-      this.routeur.navigateByUrl('/');
-      this.compteService.seDeconnecter();
-    }
+
+  constructor(private compteService: CompteService, private routeur: Router, private toastr: ToastrService) { }
+
+  ngOnInit(): void {
+    this.compteService.compteConnecte$.subscribe(compte => {
+      this.estConnecte = !!compte;
+    });
+  }
+
+  seDeconnecter() {
+    this.routeur.navigateByUrl('/');
+    this.compteService.seDeconnecter();
+  }
 }

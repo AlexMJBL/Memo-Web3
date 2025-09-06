@@ -7,10 +7,10 @@ import { provideHttpClient } from '@angular/common/http';
 
 
 export const appConfig: ApplicationConfig = {
-  providers: [provideZoneChangeDetection({ eventCoalescing: true }), provideRouter(routes), provideAnimations(),provideHttpClient(), provideToastr({
-  timeOut: 3000,
-  positionClass: 'toast-bottom-right',
-  preventDuplicates: true,
+  providers: [provideZoneChangeDetection({ eventCoalescing: true }), provideRouter(routes), provideAnimations(), provideHttpClient(), provideToastr({
+    timeOut: 3000,
+    positionClass: 'toast-bottom-right',
+    preventDuplicates: true,
   })]
 };
 

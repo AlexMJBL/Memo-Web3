@@ -9,7 +9,7 @@ export const loggedGuard: CanActivateFn = (route, state) => {
   const toastr = inject(ToastrService)
   const routeur = inject(Router)
 
-  if(compteService.compteConnecte$.value){
+  if (compteService.compteConnecte$.value) {
     toastr.error('La page demandée n\'est pas accessible');
     routeur.navigateByUrl('home')
     return false;

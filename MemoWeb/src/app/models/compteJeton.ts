@@ -1,4 +1,4 @@
-export interface CompteJeton{
+export interface CompteJeton {
     nomUtilisateur: string
     dateEmission: Date
 }

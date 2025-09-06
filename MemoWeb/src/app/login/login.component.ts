@@ -15,23 +15,23 @@ import { FormsModule } from '@angular/forms';
 })
 export class LoginComponent {
 
-  infoConnexion: Compte = {motDePasse : '', nomUtilisateur : ''};
+  infoConnexion: Compte = { motDePasse: '', nomUtilisateur: '' };
 
-  constructor(private compteService: CompteService, private routeur: Router, private toastr: ToastrService){ }
+  constructor(private compteService: CompteService, private routeur: Router, private toastr: ToastrService) { }
 
-  seConnecter(){
+  seConnecter() {
 
     if (!this.infoConnexion.nomUtilisateur || !this.infoConnexion.motDePasse) {
-    this.toastr.error('Veuillez remplir tous les champs');
-    return;
+      this.toastr.error('Veuillez remplir tous les champs');
+      return;
     }
 
     this.compteService.seConnecter(this.infoConnexion).subscribe(
-    {
-      next: () => {
-        this.routeur.navigateByUrl('/home');
-      },
-      error: erreur => this.toastr.error(erreur.error.message)
-    });
+      {
+        next: () => {
+          this.routeur.navigateByUrl('/home');
+        },
+        error: erreur => this.toastr.error(erreur.error.message)
+      });
   }
 }

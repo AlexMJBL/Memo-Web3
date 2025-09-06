@@ -1,4 +1,4 @@
-export interface Compte{
-    nomUtilisateur:string
-    motDePasse:string
+export interface Compte {
+    nomUtilisateur: string
+    motDePasse: string
 }

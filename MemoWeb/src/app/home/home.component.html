@@ -1,8 +1,8 @@
 <button class="btn" routerLink="/memo/nouveau">Nouveau</button>
 <div class="container">
     @for(memo of memos; track memo.id){
-        <div class="row">
+    <div class="row">
         <app-memo [memo]="memo" (memoSupprime)="onMemoSupprime($event)"></app-memo>
-        </div>
+    </div>
     }
 </div>

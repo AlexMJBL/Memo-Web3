@@ -15,9 +15,9 @@ import { RouterLink } from "@angular/router";
 export class HomeComponent {
 
   memos: Memo[] = [];
-  
 
-  constructor(private memoService: MemoService, private toastr: ToastrService ) { }
+
+  constructor(private memoService: MemoService, private toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.chargerMemos();
@@ -31,11 +31,11 @@ export class HomeComponent {
   }
 
   onMemoSupprime(id: number) {
-  this.memos = this.memos.filter(m => m.id !== id);
+    this.memos = this.memos.filter(m => m.id !== id);
   }
 
   trackById(index: number, memo: Memo) {
-  return memo.id;
+    return memo.id;
   }
 
 }

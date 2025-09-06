@@ -2,11 +2,11 @@
     <form (ngSubmit)="seConnecter()">
         <h2>Se connecter</h2>
         <label for="username">Nom d'utilisateur</label>
-        <input class="form-control" type="text" name="username" 
-        [ngModel]="infoConnexion.nomUtilisateur" (ngModelChange)="infoConnexion.nomUtilisateur = $event">
+        <input class="form-control" type="text" name="username" [ngModel]="infoConnexion.nomUtilisateur"
+            (ngModelChange)="infoConnexion.nomUtilisateur = $event">
         <label for="password">Mot de passe</label>
-        <input class="form-control" type="password" name="password"
-        [ngModel] = "infoConnexion.motDePasse" (ngModelChange) = "infoConnexion.motDePasse = $event">
+        <input class="form-control" type="password" name="password" [ngModel]="infoConnexion.motDePasse"
+            (ngModelChange)="infoConnexion.motDePasse = $event">
         <button type="submit" class="btn btn-primary">Se connecter</button>
         <button class="btn btn-secondary" type="button" routerLink="/nouveauCompte">S'inscrire</button>
     </form>
