@@ -3,11 +3,12 @@ import { Memo } from '../models/Memo';
 import { MemoService } from '../services/memo.service';
 import { ToastrService } from 'ngx-toastr';
 import { MemoComponent } from "../memo/memo.component";
+import { RouterLink } from "@angular/router";
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [MemoComponent],
+  imports: [MemoComponent, RouterLink],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
