@@ -1,5 +1,6 @@
 <div class="container">
     <form (ngSubmit)="seConnecter()">
+        <h2>Se connecter</h2>
         <label for="username">Nom d'utilisateur</label>
         <input class="form-control" type="text" name="username" 
         [ngModel]="infoConnexion.nomUtilisateur" (ngModelChange)="infoConnexion.nomUtilisateur = $event">

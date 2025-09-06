@@ -19,6 +19,16 @@ builder.Services.AddScoped(typeof(IAsyncRepository<,>), typeof(AsyncRepository<,
 builder.Services.AddScoped<IMemoService, MemoService>();
 builder.Services.AddScoped<ICompteService, CompteService>();
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAngularDev",
+        policy =>
+        {
+            policy.WithOrigins("http://localhost:4200") // autorise Angular dev server
+                  .AllowAnyHeader()
+                  .AllowAnyMethod();
+        });
+});
 
 var app = builder.Build();
 
@@ -28,6 +38,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseCors("AllowAngularDev");
 
 app.UseAuthorization();
 

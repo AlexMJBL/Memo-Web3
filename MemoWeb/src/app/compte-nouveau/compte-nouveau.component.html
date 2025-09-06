@@ -1,1 +1,15 @@
-<p>compte-nouveau works!</p>
+<div class="container">
+    <form (ngSubmit)="sInscrire()">
+        <h2>S'inscrire</h2>
+        <label for="username">Nom d'utilisateur</label>
+        <input class="form-control" type="text" name="username" 
+        [ngModel] = "compte.nomUtilisateur" (ngModelChange) = "compte.nomUtilisateur = $event">
+        <label for="password">Mot de passe</label>
+        <input class="form-control" type="password" name="password"
+        [ngModel] = "compte.motDePasse" (ngModelChange) = "compte.motDePasse = $event">
+        <div class="text-center">
+        <button class="btn btn-success" type="submit">Sauvegarder</button>
+        <button class="btn btn-secondary" type="button" (click)="annuler()">Annuler</button>
+        </div>
+        </form>
+</div>
