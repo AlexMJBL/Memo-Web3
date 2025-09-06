@@ -1,0 +1,8 @@
+#logContainer {
+    width: 400px;
+    border-radius: 15px;
+}
+
+#main-container{
+    min-height: 80vh;
+}

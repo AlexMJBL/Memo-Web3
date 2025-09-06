@@ -1,15 +1,32 @@
-<div class="container">
+<div class="container d-flex justify-content-center align-items-center" id="main-container">
+  <div class="card shadow-lg p-4" id="newlogcontainer">
+    <h2 class="text-center mb-4">S'inscrire</h2>
+
     <form (ngSubmit)="sInscrire()">
-        <h2>S'inscrire</h2>
-        <label for="username">Nom d'utilisateur</label>
-        <input class="form-control" type="text" name="username" 
-        [ngModel] = "compte.nomUtilisateur" (ngModelChange) = "compte.nomUtilisateur = $event">
-        <label for="password">Mot de passe</label>
-        <input class="form-control" type="password" name="password"
-        [ngModel] = "compte.motDePasse" (ngModelChange) = "compte.motDePasse = $event">
-        <div class="text-center">
+      <div class="mb-3">
+        <label for="username" class="form-label">Nom d'utilisateur</label>
+        <input class="form-control"
+               type="text"
+               id="username"
+               name="username"
+               [ngModel]="compte.nomUtilisateur"
+               (ngModelChange)="compte.nomUtilisateur = $event">
+      </div>
+
+      <div class="mb-3">
+        <label for="password" class="form-label">Mot de passe</label>
+        <input class="form-control"
+               type="password"
+               id="password"
+               name="password"
+               [ngModel]="compte.motDePasse"
+               (ngModelChange)="compte.motDePasse = $event">
+      </div>
+
+      <div class="d-flex justify-content-between">
         <button class="btn btn-success" type="submit">Sauvegarder</button>
-        <button class="btn btn-secondary" type="button" (click)="annuler()">Annuler</button>
-        </div>
-        </form>
+        <button class="btn btn-outline-secondary" type="button" (click)="annuler()">Annuler</button>
+      </div>
+    </form>
+  </div>
 </div>
