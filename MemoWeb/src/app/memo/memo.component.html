@@ -1,1 +1,11 @@
-<p>memo works!</p>
+@if(memo){
+    <div>
+        <div>
+        <h2>{{memo.titre}}</h2>
+        <button class="btn btn-danger" (click)="supprimerMemo()">X</button>
+        </div>
+        <p>{{memo.dateCreation}}</p>
+        <p>{{memo.description}}</p>
+
+    </div>
+}

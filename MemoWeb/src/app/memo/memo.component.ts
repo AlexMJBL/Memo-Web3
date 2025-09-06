@@ -1,4 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Memo } from '../models/Memo';
+import { MemoService } from '../services/memo.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-memo',
@@ -8,5 +11,20 @@ import { Component } from '@angular/core';
   styleUrl: './memo.component.css'
 })
 export class MemoComponent {
+  @Input() memo : Memo | undefined;
+  @Output() memoSupprime = new EventEmitter<number>();
 
+  constructor(private memoService: MemoService, private toastr: ToastrService ) { }
+
+  supprimerMemo() {
+  if (!this.memo) return;
+
+  this.memoService.supprimerMemo(this.memo.id).subscribe({
+    next: (response: any) => {
+      this.toastr.success(response.message);
+      this.memoSupprime.emit(this.memo!.id);
+    },
+    error: (erreur) => this.toastr.error(erreur.error?.message || 'Erreur inconnue')
+  });
+}
 }

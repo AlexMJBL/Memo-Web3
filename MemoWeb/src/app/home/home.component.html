@@ -1,1 +1,8 @@
-<p>home works!</p>
+<div class="container">
+    
+    @for(memo of memos; track memo.id){
+        <div class="row">
+        <app-memo [memo]="memo" (memoSupprime)="onMemoSupprime($event)"></app-memo>
+        </div>
+    }
+</div>

@@ -105,7 +105,7 @@ namespace MemoApp.Api.Controllers
             try
             {
                 await _memoService.SuprimerAsync(id);
-                return Ok("Memo supprimer avec succès");
+                return Ok(new { message = "Memo supprimer avec succès" } );
             }
             catch (ArgumentException ex)
             {

@@ -42,15 +42,7 @@ namespace MemoApp.ApplicationCore.Services
         public async  Task SuprimerAsync(int id)
         {
             Memo memo = await _memoRepository.GetByIdAsync(id);
-
-            if(memo == null)
-            {
-                throw new KeyNotFoundException("Le mémo avec l'identifiant spécifié n'existe pas.");
-            }
-
             await _memoRepository.DeleteAsync(memo);
-
-
         }
 
 
