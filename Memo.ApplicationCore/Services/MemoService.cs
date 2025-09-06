@@ -1,5 +1,6 @@
 ﻿using MemoApp.ApplicationCore.Entities;
 using MemoApp.ApplicationCore.Interfaces;
+using System.ComponentModel.DataAnnotations;
 
 namespace MemoApp.ApplicationCore.Services
 {
@@ -21,8 +22,14 @@ namespace MemoApp.ApplicationCore.Services
             {
                 throw new ArgumentException("L'identifiant du compte ne peut pas être nul.", nameof(memo.IdCompte));
             }
-            
-            memo.DateCreation = DateTime.UtcNow;
+
+            if (string.IsNullOrWhiteSpace(memo.Titre) || memo.Titre.Length > 150)
+                throw new ArgumentException("Le titre est obligatoire et doit contenir au maximum 150 caractères.", nameof(memo.Titre));
+
+            if (string.IsNullOrWhiteSpace(memo.Description) || memo.Description.Length > 150)
+                throw new ArgumentException("La description est obligatoire et doit contenir au maximum 150 caractères.", nameof(memo.Description));
+
+            memo.DateCreation = DateTime.Now;
 
             await _memoRepository.AddAsync(memo);
 

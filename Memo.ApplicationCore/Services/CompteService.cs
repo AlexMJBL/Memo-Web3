@@ -14,10 +14,11 @@ namespace MemoApp.ApplicationCore.Services
 
         public async Task<Compte> CreerCompteAsync(Compte compte)
         {
-            if (string.IsNullOrWhiteSpace(compte.MotDePasse) || string.IsNullOrWhiteSpace(compte.NomUtilisateur))
-            {
-                throw new Exception("Le nom d'utilisateur et le mot de passe ne doivent pas etre vide .");
-            }
+            if (string.IsNullOrWhiteSpace(compte.NomUtilisateur) || compte.NomUtilisateur.Length > 150)
+                throw new Exception("Le nom d'utilisateur est obligatoire et ne peut pas dépasser 150 caractères.");
+
+            if (string.IsNullOrWhiteSpace(compte.MotDePasse) || compte.MotDePasse.Length > 150)
+                throw new Exception("Le mot de passe est obligatoire et ne peut pas dépasser 150 caractères.");
 
             Compte? compteExistant = await ObtenirCompteParNomAsync(compte.NomUtilisateur);
 
@@ -26,8 +27,8 @@ namespace MemoApp.ApplicationCore.Services
                 throw new Exception("Un compte avec ce nom d'utilisateur existe déjà.");
             }
 
-            compte.DateCreation = DateTime.UtcNow;
-            compte.DateDerniereConnexion = DateTime.UtcNow;
+            compte.DateCreation = DateTime.Now;
+            compte.DateDerniereConnexion = DateTime.Now;
             await _compteRepository.AddAsync(compte);
 
             return compte;
@@ -47,7 +48,7 @@ namespace MemoApp.ApplicationCore.Services
                 throw new UnauthorizedAccessException("Nom d'utilisateur ou mot de passe incorrect.");
             }
 
-            compte.DateDerniereConnexion = DateTime.UtcNow;
+            compte.DateDerniereConnexion = DateTime.Now;
             await _compteRepository.EditAsync(compte);
 
             return compte;
