@@ -1,7 +1,10 @@
-<div class="container">
-  <p>Memo</p>
-  @if(estConnecte){<button (click)="seDeconnecter()" class="btn btn-primary">Déconnexion</button>}
-</div>
+<nav class="navbar navbar-dark bg-dark px-3 mb-3">
+  <a class="navbar-brand px-3" href="Home">Memo</a>
+
+  @if(estConnecte){<button (click)="seDeconnecter()" class="btn btn-success">
+    Déconnexion
+  </button>}
+</nav>
 
 <div class="container" id="enveloppePrincipale">
   <router-outlet></router-outlet>
