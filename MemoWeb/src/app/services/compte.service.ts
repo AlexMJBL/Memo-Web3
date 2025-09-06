@@ -34,11 +34,7 @@ export class CompteService {
   }
 
   sInscrire(compte: Compte){
-    return this.http.post(this.urlBase + 'Enregistrer', compte, {responseType: 'text'}).pipe(
-        map(message => {
-            alert(message + '. Connectez-vous pour utiliser l\'application')
-        })
-    )
+    return this.http.post(this.urlBase + 'EnregistrerCompte', compte)
   }
 
 }

@@ -16,23 +16,26 @@ import { Router } from '@angular/router';
 export class CompteNouveauComponent {
   @Output() annulerInscription = new EventEmitter();
 
-  compte: Compte = {motDePasse : '', nomUtilisateur : ''};
+  compte: Compte = { motDePasse: '', nomUtilisateur: '' };
 
-  constructor(private compteService : CompteService, private toastr: ToastrService, private router: Router){ }
+  constructor(private compteService: CompteService, private toastr: ToastrService, private router: Router) { }
 
-  sInscrire(){
+  sInscrire() {
     if (!this.compte.nomUtilisateur || !this.compte.motDePasse) {
-    this.toastr.error('Veuillez remplir tous les champs');
-    return;
-  }
+      this.toastr.error('Veuillez remplir tous les champs');
+      return;
+    }
 
     this.compteService.sInscrire(this.compte).subscribe({
-      next: () =>  this.annuler(),
-      error: erreur => this.toastr.error(erreur.error)
+      next: (message) => {
+        this.toastr.success('Compte créé avec succèes , connectez-vous pour utiliser l\'application');
+        this.annuler();
+      },
+      error: (erreur) => this.toastr.error(erreur.error.message)
     });
   }
 
-  annuler(){
-     this.router.navigateByUrl('/');
+  annuler() {
+    this.router.navigateByUrl('/');
   }
 }
