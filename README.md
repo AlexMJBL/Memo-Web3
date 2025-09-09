@@ -1,132 +1,108 @@
-📒 Memo-Web
+Memo-Web
 
-Memo-Web est une application web permettant de gérer des mémos personnels. Elle est conçue avec une architecture en couches (Clean Architecture) pour assurer la séparation des responsabilités, la maintenabilité et l’extensibilité.
+Memo-Web est une application complète de gestion de mémos personnels.
+Elle se compose de deux parties :
 
-🚀 Fonctionnalités principales
+une API ASP.NET Core pour la logique métier et l’accès aux données
 
-✍️ Créer un mémo avec un titre et une description.
+une application Angular comme interface utilisateur
 
-📑 Lister les mémos par utilisateur (compte).
+---
 
-🗑 Supprimer un mémo.
+Fonctionnalités
 
-👤 Gestion des comptes utilisateurs (inscription et connexion).
+Création de comptes utilisateurs avec validation
 
-🔐 Authentification simplifiée (retour d’un objet AuthentificationDto avec date d’émission).
+Connexion et gestion de session
 
-✅ Validation des données avec DataAnnotations (DTOs) et validations métier dans les services.
+Ajout de mémos (titre et description)
 
-🏗 Architecture
+Liste des mémos liés à un utilisateur
 
-Le projet suit une Clean Architecture composée de plusieurs couches :
+Suppression de mémos
 
-1. ApplicationCore
+---
 
-Contient les entités (Compte, Memo)
+Architecture
+Côté backend (ASP.NET Core)
 
-Contient les interfaces (ICompteService, IMemoService, IAsyncRepository)
+Organisation en Clean Architecture (ApplicationCore, Infrastructure, API)
 
-Contient la logique métier (services comme CompteService, MemoService)
+Services métiers (CompteService, MemoService)
 
-2. Infrastructure
+Repositories génériques via Entity Framework Core (SQLite par défaut)
 
-Implémente les repositories pour l’accès aux données.
+Validation avec DataAnnotations et règles métier dans les services
 
-Utilise Entity Framework Core avec SQLite (ou autre provider configuré).
+Contrôleurs REST exposant les endpoints
 
-3. API
+Côté frontend (Angular)
 
-Fournit les contrôleurs REST (CompteController, MemoController).
+Angular 17 avec Angular CLI
 
-Gère la validation via [ApiController] et DataAnnotations.
+Services Angular (HttpClient) pour la communication avec l’API
 
-Sérialisation JSON pour la communication avec le front-end.
+Formulaires réactifs avec validation (titre et description requis, max 150 caractères)
 
-📂 Structure du projet
-Memo-Web/
-│
-├── MemoApp.ApplicationCore/     # Couche métier et interfaces
-│   ├── Entities/                # Entités principales
-│   ├── Interfaces/              # Interfaces des services et repositories
-│   └── Services/                # Implémentations de la logique métier
-│
-├── MemoApp.Infrastructure/      # Couche d’accès aux données
-│   └── Repositories/            # Implémentations EF Core des interfaces
-│
-├── MemoApp.Api/                 # API REST (ASP.NET Core Web API)
-│   ├── Controllers/             # Contrôleurs API
-│   ├── DTO/                     # Objets de transfert de données
-│   └── Program.cs / Startup.cs  # Configuration de l’API
-│
-└── README.md                    # Documentation du projet
+Gestion de l’état utilisateur (connexion) avec LocalStorage
 
-⚙️ Prérequis
+Routing Angular pour naviguer entre inscription, connexion et liste de mémos
+
+---
+
+Installation et exécution
+Prérequis
 
 .NET 8 SDK
 
-SQLite
- ou SQL Server (selon ta config EF Core)
+Node.js 20+ et Angular CLI
 
-(Optionnel) Postman
- ou Swagger
- pour tester l’API
-
-▶️ Lancer l’application
-
-Cloner le repo
-
-git clone https://github.com/ton-compte/memo-web.git
-cd memo-web
-
-
-Restaurer les dépendances
-
-dotnet restore
-
-
-Appliquer les migrations EF Core
-
-dotnet ef database update --project MemoApp.Infrastructure --startup-project MemoApp.Api
-
+SQLite (ou SQL Server si configuré autrement)
 
 Lancer l’API
+cd MemoApp.Api
+dotnet run
 
-dotnet run --project MemoApp.Api
+
+L’API tourne par défaut sur http://localhost:5000/api.
+
+Lancer le client Angular
+cd memo-angular
+npm install
+ng serve -o
 
 
-L’API sera disponible sur http://localhost:5000/api
-.
+Le client tourne par défaut sur http://localhost:4200.
 
-📌 Endpoints principaux
-🔑 Comptes
+---
 
-POST /api/Compte/SeConnecter → Connexion utilisateur
+Endpoints principaux de l’API
+Comptes
 
-POST /api/Compte/EnregistrerCompte → Création de compte
+POST /api/Compte/EnregistrerCompte : créer un compte
 
-📝 Mémos
+POST /api/Compte/SeConnecter : se connecter
 
-POST /api/Memo/Ajouter → Ajouter un mémo
+Mémos
 
-GET /api/Memo/ParCompte/{idCompte} → Récupérer les mémos d’un compte
+POST /api/Memo/Ajouter : ajouter un mémo
 
-DELETE /api/Memo/Supprimer/{id} → Supprimer un mémo
+GET /api/Memo/ParCompte/{idCompte} : obtenir les mémos d’un compte
 
-🔒 Validation & Sécurité
+DELETE /api/Memo/Supprimer/{id} : supprimer un mémo
 
-Les DTOs utilisent des DataAnnotations ([Required], [MaxLength]) → validation automatique côté API.
+---
 
-La logique métier dans les services fait une validation supplémentaire (ex. IdCompte obligatoire, mémo existant avant suppression).
+Validation et sécurité
 
-Les mots de passe doivent être hashés avant stockage (exemple avec BCrypt.Net).
+Les DTOs sont validés côté API avec DataAnnotations
 
-🧪 Tests
+Les services métiers appliquent une validation supplémentaire pour garantir l’intégrité des données
 
-Les services peuvent être testés indépendamment de l’API grâce aux interfaces (ICompteService, IMemoService).
-Exemple de tests possibles :
+Les mots de passe doivent être stockés de façon sécurisée (hash avant enregistrement)
 
-Création de mémo avec titre vide → exception.
 
-Création de compte avec nom déjà utilisé → exception.
 
-Récupération des mémos par compte valide → retourne liste.
+Version mobile (PWA)
+
+Ajout de tests unitaires et d’intégration
