@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MemoApp.Infrastructure.Migrations
 {
     [DbContext(typeof(MemoContext))]
-    [Migration("20250905213809_Initial")]
-    partial class Initial
+    [Migration("20250908225340_Initial-Create")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

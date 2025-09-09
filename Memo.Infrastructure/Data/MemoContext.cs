@@ -19,16 +19,52 @@ namespace MemoApp.Infrastructure.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-     
-            modelBuilder.Entity<Memo>()
-                .Property(m => m.Id)
+
+            modelBuilder.Entity<Memo>(entity =>
+            {
+                entity.Property(m => m.Id)
                 .ValueGeneratedOnAdd();
 
-            modelBuilder.Entity<Memo>()
-                .HasOne(m => m.Compte)
-                .WithMany(c => c.Memos)
-                .HasForeignKey(m => m.IdCompte)
-                .OnDelete(DeleteBehavior.Cascade);
+                entity.Property(m => m.Titre)
+                    .IsRequired()
+                    .HasMaxLength(150);
+
+                entity.Property(m => m.Description)
+                    .IsRequired()
+                    .HasMaxLength(150);
+
+                entity.Property(m => m.DateCreation)
+                    .IsRequired();
+
+                entity.Property(m => m.IdCompte)
+                    .IsRequired()
+                    .HasMaxLength(50);
+
+                entity.HasOne(m => m.Compte)
+                    .WithMany(c => c.Memos)
+                    .HasForeignKey(m => m.IdCompte)
+                    .OnDelete(DeleteBehavior.Cascade);
+            });
+
+            modelBuilder.Entity<Compte>(entity =>
+            {
+                entity.Property(m => m.Id)
+                .ValueGeneratedOnAdd();
+
+                entity.Property(c => c.NomUtilisateur)
+                    .IsRequired()
+                    .HasMaxLength(150);
+
+                entity.Property(c => c.MotDePasse)
+                    .IsRequired()
+                    .HasMaxLength(150);
+
+                entity.Property(c => c.DateCreation)
+                    .IsRequired();
+
+            });
+
+
         }
     }
 }

@@ -11,7 +11,6 @@ namespace MemoApp.ApplicationCore.Entities
     public abstract class BaseEntity<TKey>
     {
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public TKey Id { get; set; }
     }
 }
