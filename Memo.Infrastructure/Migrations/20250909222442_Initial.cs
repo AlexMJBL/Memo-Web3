@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace MemoApp.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreate : Migration
+    public partial class Initial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -18,6 +18,7 @@ namespace MemoApp.Infrastructure.Migrations
                     Id = table.Column<string>(type: "TEXT", nullable: false),
                     NomUtilisateur = table.Column<string>(type: "TEXT", maxLength: 150, nullable: false),
                     MotDePasse = table.Column<string>(type: "TEXT", maxLength: 150, nullable: false),
+                    Salt = table.Column<byte[]>(type: "BLOB", nullable: false),
                     DateCreation = table.Column<DateTime>(type: "TEXT", nullable: false),
                     DateDerniereConnexion = table.Column<DateTime>(type: "TEXT", nullable: true)
                 },

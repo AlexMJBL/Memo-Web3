@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MemoApp.Infrastructure.Migrations
 {
     [DbContext(typeof(MemoContext))]
-    [Migration("20250908225340_Initial-Create")]
-    partial class InitialCreate
+    [Migration("20250909222442_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -41,6 +41,10 @@ namespace MemoApp.Infrastructure.Migrations
                         .IsRequired()
                         .HasMaxLength(150)
                         .HasColumnType("TEXT");
+
+                    b.Property<byte[]>("Salt")
+                        .IsRequired()
+                        .HasColumnType("BLOB");
 
                     b.HasKey("Id");
 

@@ -11,6 +11,8 @@ namespace MemoApp.ApplicationCore.Entities
         [StringLength(150)]
         public string MotDePasse { get; set; }
         [Required]
+        public byte[]? Salt { get; set; }
+        [Required]
         public DateTime DateCreation { get; set; }
         public DateTime? DateDerniereConnexion { get; set; }
 

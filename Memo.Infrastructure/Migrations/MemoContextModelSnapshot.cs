@@ -39,6 +39,10 @@ namespace MemoApp.Infrastructure.Migrations
                         .HasMaxLength(150)
                         .HasColumnType("TEXT");
 
+                    b.Property<byte[]>("Salt")
+                        .IsRequired()
+                        .HasColumnType("BLOB");
+
                     b.HasKey("Id");
 
                     b.ToTable("Comptes");

@@ -1,5 +1,7 @@
 ﻿using MemoApp.ApplicationCore.Entities;
 using MemoApp.ApplicationCore.Interfaces;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace MemoApp.ApplicationCore.Services
 {
@@ -27,6 +29,13 @@ namespace MemoApp.ApplicationCore.Services
                 throw new Exception("Un compte avec ce nom d'utilisateur existe déjà.");
             }
 
+            using (var hmac = new HMACSHA512())
+            {
+                var hashBytes = hmac.ComputeHash(Encoding.UTF8.GetBytes(compte.MotDePasse));
+                compte.MotDePasse = Convert.ToBase64String(hashBytes);
+                compte.Salt = hmac.Key;
+            }
+
             compte.DateCreation = DateTime.Now;
             compte.DateDerniereConnexion = DateTime.Now;
             await _compteRepository.AddAsync(compte);
@@ -43,9 +52,17 @@ namespace MemoApp.ApplicationCore.Services
 
             Compte? compte = await ObtenirCompteParNomAsync(nomUtilisateur);
 
-            if (compte == null || compte.MotDePasse != motDePasse)
+            if (compte == null)
             {
-                throw new UnauthorizedAccessException("Nom d'utilisateur ou mot de passe incorrect.");
+                throw new UnauthorizedAccessException("Nom d'utilisateur invalide");
+            }
+
+            using (var hmac = new HMACSHA512(compte.Salt))
+            {
+                var hash = hmac.ComputeHash(Encoding.UTF8.GetBytes(motDePasse));
+                var hashString = Convert.ToBase64String(hash);
+                if (hashString != compte.MotDePasse)
+                    throw new UnauthorizedAccessException("Mot de passe incorrect.");
             }
 
             compte.DateDerniereConnexion = DateTime.Now;
