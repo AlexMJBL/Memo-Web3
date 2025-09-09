@@ -20,7 +20,7 @@ namespace MemoApp.ApplicationCore.Services
             }
             if(memo.IdCompte == null)
             {
-                throw new ArgumentException("L'identifiant du compte ne peut pas être nul.", nameof(memo.IdCompte));
+                throw new ArgumentNullException("L'identifiant du compte ne peut pas être nul.", nameof(memo.IdCompte));
             }
 
             if (string.IsNullOrWhiteSpace(memo.Titre) || memo.Titre.Length > 150)
@@ -40,7 +40,7 @@ namespace MemoApp.ApplicationCore.Services
         {
             if (string.IsNullOrWhiteSpace(idCompte))
             {
-                throw new ArgumentException("L'identifiant du compte ne peut pas être nul ou vide.", nameof(idCompte));
+                throw new ArgumentNullException("L'identifiant du compte ne peut pas être nul ou vide.", nameof(idCompte));
             }
 
             return await _memoRepository.ListAsync(m => m.IdCompte.ToLower() == idCompte.ToLower());
@@ -49,6 +49,9 @@ namespace MemoApp.ApplicationCore.Services
         public async  Task SuprimerAsync(int id)
         {
             Memo memo = await _memoRepository.GetByIdAsync(id);
+            if (memo == null)
+                throw new KeyNotFoundException($"Aucun mémo trouvé avec l'ID {id}.");
+
             await _memoRepository.DeleteAsync(memo);
         }
 
