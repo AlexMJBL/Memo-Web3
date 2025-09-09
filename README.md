@@ -64,7 +64,7 @@ cd MemoApp.Api
 dotnet run
 
 
-L’API tourne par défaut sur http://localhost:5000/api.
+L’API tourne par défaut sur http://localhost:5050/api.
 
 Lancer le client Angular
 cd memo-angular
